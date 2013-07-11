@@ -6,8 +6,8 @@
 #ifndef BOOST_MPL_IS_ADJACENT_HPP
 #define BOOST_MPL_IS_ADJACENT_HPP
 
+#include <boost/mpl/adjacent_vertices_of.hpp>
 #include <boost/mpl/contains.hpp>
-#include <boost/mpl/graph_intrinsics.hpp>
 
 
 namespace boost { namespace mpl {

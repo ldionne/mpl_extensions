@@ -6,9 +6,9 @@
 #ifndef BOOST_MPL_IS_REACHABLE_HPP
 #define BOOST_MPL_IS_REACHABLE_HPP
 
+#include <boost/mpl/adjacent_vertices_of.hpp>
 #include <boost/mpl/any_of.hpp>
 #include <boost/mpl/filter_view.hpp>
-#include <boost/mpl/graph_intrinsics.hpp>
 #include <boost/mpl/has_key.hpp>
 #include <boost/mpl/insert.hpp>
 #include <boost/mpl/is_adjacent.hpp>

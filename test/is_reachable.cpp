@@ -11,7 +11,7 @@ using namespace boost::mpl;
 
 template <typename ...AdjacentVertices>
 struct vertex {
-    using adjacent_vertices = vector<AdjacentVertices...>;
+    using open_neighborhood = vector<AdjacentVertices...>;
 };
 
 namespace test_graph_with_cycle {

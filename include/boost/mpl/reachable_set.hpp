@@ -6,11 +6,11 @@
 #ifndef BOOST_MPL_REACHABLE_SET_HPP
 #define BOOST_MPL_REACHABLE_SET_HPP
 
+#include <boost/mpl/adjacent_vertices_of.hpp>
 #include <boost/mpl/empty.hpp>
 #include <boost/mpl/end.hpp>
 #include <boost/mpl/filter_view.hpp>
 #include <boost/mpl/front.hpp>
-#include <boost/mpl/graph_intrinsics.hpp>
 #include <boost/mpl/has_key.hpp>
 #include <boost/mpl/insert.hpp>
 #include <boost/mpl/insert_range.hpp>
