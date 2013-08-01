@@ -12,9 +12,9 @@
 
 namespace boost { namespace mpl {
     //! Return whether `V` is in the open neighborhood of `U`.
-    template <typename U, typename V>
+    template <typename Graph, typename U, typename V>
     struct is_adjacent
-        : contains<typename adjacent_vertices_of<U>::type, V>
+        : contains<typename adjacent_vertices_of<Graph, U>::type, V>
     { };
 }} // end namespace boost::mpl
 

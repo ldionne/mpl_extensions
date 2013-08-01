@@ -22,23 +22,25 @@
 
 
 namespace boost { namespace mpl {
-    namespace reachable_set_detail {
+namespace reachable_set_detail {
+    template <typename Graph>
+    struct impl {
         template <typename Vertex, typename Seen>
         struct unseen_adjacent_vertices {
             using type = filter_view<
-                typename adjacent_vertices_of<Vertex>::type,
+                typename adjacent_vertices_of<Graph, Vertex>::type,
                 not_<has_key<Seen, _1>>
             >;
         };
 
         template <typename Seen, typename ToVisit, bool=empty<ToVisit>::value>
-        struct reachable_set_impl {
+        struct apply {
             using Vertex = typename front<ToVisit>::type;
 
             using NewToVisit = typename pop_front<ToVisit>::type;
             using NewSeen = typename insert<Seen, Vertex>::type;
 
-            using type = typename reachable_set_impl<
+            using type = typename apply<
                 NewSeen,
                 typename insert_range<
                     NewToVisit,
@@ -49,16 +51,19 @@ namespace boost { namespace mpl {
         };
 
         template <typename Seen, typename ToVisit>
-        struct reachable_set_impl<Seen, ToVisit, true> {
+        struct apply<Seen, ToVisit, true> {
             using type = Seen;
         };
-    }
+    };
+} // end namespace reachable_set_detail
 
-    //! Return the set of all the vertices that are reachable from a `Vertex`.
-    template <typename Vertex>
-    struct reachable_set
-        : reachable_set_detail::reachable_set_impl<set<>, vector<Vertex>>
-    { };
+//! Return the set of all the vertices that are reachable from a `Vertex`.
+template <typename Graph, typename Vertex>
+struct reachable_set
+    : reachable_set_detail::impl<
+        Graph
+    >::template apply<set<>, vector<Vertex>>
+{ };
 }} // end namespace boost::mpl
 
 #endif // !BOOST_MPL_REACHABLE_SET_HPP

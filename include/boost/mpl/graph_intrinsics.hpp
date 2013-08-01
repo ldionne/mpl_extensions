@@ -18,51 +18,51 @@ namespace graph_intrinsics_detail {
     BOOST_MPL_HAS_XXX_TRAIT_DEF(type)
 
     template <typename Vertex>
-    struct open_neighborhood_of {
+    struct nested_open_neighborhood {
         using type = typename Vertex::open_neighborhood;
     };
 
     template <typename Graph>
-    struct vertices_of {
+    struct nested_vertices {
         using type = typename Graph::vertices;
     };
 } // end namespace graph_intrinsics_detail
 
 namespace extension {
-    template <typename Tag>
+    template <typename Tag, typename Enable = void>
     struct open_neighborhood_of_impl {
-        template <typename Vertex>
+        template <typename Graph, typename Vertex>
         struct apply
             : lazy_enable_if<
                 graph_intrinsics_detail::has_open_neighborhood<Vertex>,
-                graph_intrinsics_detail::open_neighborhood_of<Vertex>
+                graph_intrinsics_detail::nested_open_neighborhood<Vertex>
             >
         { };
     };
 
-    template <typename Tag>
+    template <typename Tag, typename Enable = void>
     struct vertices_of_impl {
         template <typename Graph>
         struct apply
             : lazy_enable_if<
                 graph_intrinsics_detail::has_vertices<Graph>,
-                graph_intrinsics_detail::vertices_of<Graph>
+                graph_intrinsics_detail::nested_vertices<Graph>
             >
         { };
     };
 } // end namespace extension
 
 //! Return the set of vertices and graphs in the open neighborhood
-//! of a `Vertex`.
-template <typename Vertex>
+//! of a `Vertex` in a `Graph`.
+template <typename Graph, typename Vertex>
 struct open_neighborhood_of
     : extension::open_neighborhood_of_impl<
-        typename tag_of<Vertex>::type
-    >::template apply<Vertex>
+        typename tag_of<Graph>::type
+    >::template apply<Graph, Vertex>
 { };
 
-//! Return the set of all the vertices of a graph.
-template <typename Graph, typename Enable = void>
+//! Return the set of all the vertices of a `Graph`.
+template <typename Graph>
 struct vertices_of
     : extension::vertices_of_impl<
         typename tag_of<Graph>::type
@@ -70,9 +70,9 @@ struct vertices_of
 { };
 
 //! Return whether a type is an MPL `Vertex`.
-template <typename T, typename Enable = void>
+template <typename Graph, typename T, typename Enable = void>
 struct is_vertex
-    : graph_intrinsics_detail::has_type<open_neighborhood_of<T>>::type
+    : graph_intrinsics_detail::has_type<open_neighborhood_of<Graph, T>>::type
 { };
 
 //! Return whether a type is an MPL `Graph`.

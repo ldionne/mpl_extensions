@@ -16,6 +16,8 @@ struct vertex {
     using open_neighborhood = vector<AdjacentVertices...>;
 };
 
+struct dummy_graph;
+
 namespace test_cyclic_graph {
     // cycle: u0 -> u2 -> u1 -> u0
     struct u0 : vertex<struct u2> { };
@@ -23,15 +25,15 @@ namespace test_cyclic_graph {
     struct u2 : vertex<u1> { };
 
     static_assert(set_equal<
-        reachable_set<u0>::type, set<u0, u2, u1>
+        reachable_set<dummy_graph, u0>::type, set<u0, u2, u1>
     >::value, "");
 
     static_assert(set_equal<
-        reachable_set<u1>::type, set<u1, u0, u2>
+        reachable_set<dummy_graph, u1>::type, set<u1, u0, u2>
     >::value, "");
 
     static_assert(set_equal<
-        reachable_set<u2>::type, set<u2, u1, u0>
+        reachable_set<dummy_graph, u2>::type, set<u2, u1, u0>
     >::value, "");
 }
 
@@ -42,19 +44,19 @@ namespace test_acyclic_graph {
     struct v3 : vertex<v1> { };
 
     static_assert(set_equal<
-        reachable_set<v0>::type, set<v0>
+        reachable_set<dummy_graph, v0>::type, set<v0>
     >::value, "");
 
     static_assert(set_equal<
-        reachable_set<v1>::type, set<v1, v0>
+        reachable_set<dummy_graph, v1>::type, set<v1, v0>
     >::value, "");
 
     static_assert(set_equal<
-        reachable_set<v2>::type, set<v2, v0, v1>
+        reachable_set<dummy_graph, v2>::type, set<v2, v0, v1>
     >::value, "");
 
     static_assert(set_equal<
-        reachable_set<v3>::type, set<v3, v1, v0>
+        reachable_set<dummy_graph, v3>::type, set<v3, v1, v0>
     >::value, "");
 }
 

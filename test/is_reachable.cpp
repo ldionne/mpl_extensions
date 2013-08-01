@@ -14,6 +14,8 @@ struct vertex {
     using open_neighborhood = vector<AdjacentVertices...>;
 };
 
+struct dummy_graph;
+
 namespace test_graph_with_cycle {
     // cycle: u0 -> u4 -> u1 -> u0
     struct u0 : vertex<struct u4> { };
@@ -22,7 +24,7 @@ namespace test_graph_with_cycle {
     struct u3 : vertex<u2> { };
     struct u4 : vertex<u1, u3> { };
 
-    static_assert(is_reachable<u0, u2>::value, "");
+    static_assert(is_reachable<dummy_graph, u0, u2>::value, "");
 }
 
 namespace test_acyclic_graph {
@@ -32,35 +34,35 @@ namespace test_acyclic_graph {
     struct v3 : vertex<> { };
     struct v4 : vertex<v3, v2> { };
 
-    static_assert(is_reachable<v0, v0>::value, "");
-    static_assert(!is_reachable<v0, v1>::value, "");
-    static_assert(!is_reachable<v0, v2>::value, "");
-    static_assert(is_reachable<v0, v3>::value, "");
-    static_assert(!is_reachable<v0, v4>::value, "");
+    static_assert(is_reachable<dummy_graph, v0, v0>::value, "");
+    static_assert(!is_reachable<dummy_graph, v0, v1>::value, "");
+    static_assert(!is_reachable<dummy_graph, v0, v2>::value, "");
+    static_assert(is_reachable<dummy_graph, v0, v3>::value, "");
+    static_assert(!is_reachable<dummy_graph, v0, v4>::value, "");
 
-    static_assert(is_reachable<v1, v0>::value, "");
-    static_assert(is_reachable<v1, v1>::value, "");
-    static_assert(!is_reachable<v1, v2>::value, "");
-    static_assert(is_reachable<v1, v3>::value, "");
-    static_assert(!is_reachable<v1, v4>::value, "");
+    static_assert(is_reachable<dummy_graph, v1, v0>::value, "");
+    static_assert(is_reachable<dummy_graph, v1, v1>::value, "");
+    static_assert(!is_reachable<dummy_graph, v1, v2>::value, "");
+    static_assert(is_reachable<dummy_graph, v1, v3>::value, "");
+    static_assert(!is_reachable<dummy_graph, v1, v4>::value, "");
 
-    static_assert(is_reachable<v2, v0>::value, "");
-    static_assert(is_reachable<v2, v1>::value, "");
-    static_assert(is_reachable<v2, v2>::value, "");
-    static_assert(is_reachable<v2, v3>::value, "");
-    static_assert(!is_reachable<v2, v4>::value, "");
+    static_assert(is_reachable<dummy_graph, v2, v0>::value, "");
+    static_assert(is_reachable<dummy_graph, v2, v1>::value, "");
+    static_assert(is_reachable<dummy_graph, v2, v2>::value, "");
+    static_assert(is_reachable<dummy_graph, v2, v3>::value, "");
+    static_assert(!is_reachable<dummy_graph, v2, v4>::value, "");
 
-    static_assert(!is_reachable<v3, v0>::value, "");
-    static_assert(!is_reachable<v3, v1>::value, "");
-    static_assert(!is_reachable<v3, v2>::value, "");
-    static_assert(is_reachable<v3, v3>::value, "");
-    static_assert(!is_reachable<v3, v4>::value, "");
+    static_assert(!is_reachable<dummy_graph, v3, v0>::value, "");
+    static_assert(!is_reachable<dummy_graph, v3, v1>::value, "");
+    static_assert(!is_reachable<dummy_graph, v3, v2>::value, "");
+    static_assert(is_reachable<dummy_graph, v3, v3>::value, "");
+    static_assert(!is_reachable<dummy_graph, v3, v4>::value, "");
 
-    static_assert(is_reachable<v4, v0>::value, "");
-    static_assert(is_reachable<v4, v1>::value, "");
-    static_assert(is_reachable<v4, v2>::value, "");
-    static_assert(is_reachable<v4, v3>::value, "");
-    static_assert(is_reachable<v4, v4>::value, "");
+    static_assert(is_reachable<dummy_graph, v4, v0>::value, "");
+    static_assert(is_reachable<dummy_graph, v4, v1>::value, "");
+    static_assert(is_reachable<dummy_graph, v4, v2>::value, "");
+    static_assert(is_reachable<dummy_graph, v4, v3>::value, "");
+    static_assert(is_reachable<dummy_graph, v4, v4>::value, "");
 }
 
 

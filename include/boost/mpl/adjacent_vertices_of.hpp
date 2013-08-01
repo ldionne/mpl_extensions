@@ -16,15 +16,16 @@
 
 
 namespace boost { namespace mpl {
-    //! Return the set of vertices in the open neighborhood of a `Vertex`.
-    template <typename Vertex>
+    //! Return the set of vertices in the open neighborhood of a `Vertex`
+    //! in a `Graph`.
+    template <typename Graph, typename Vertex>
     struct adjacent_vertices_of
-        : fold<typename open_neighborhood_of<Vertex>::type,
+        : fold<typename open_neighborhood_of<Graph, Vertex>::type,
             set<>,
             if_<
                 is_graph<_2>,
                 set_insert_range<
-                    if_<is_vertex<_2>, insert<_1, _2>, _1>,
+                    if_<is_vertex<Graph, _2>, insert<_1, _2>, _1>,
                     vertices_of<_2>
                 >,
                 insert<_1, _2>

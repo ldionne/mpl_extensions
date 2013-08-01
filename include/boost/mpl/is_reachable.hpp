@@ -21,39 +21,39 @@
 
 namespace boost { namespace mpl {
     namespace is_reachable_detail {
-        template <typename U, typename V, typename Seen>
+        template <typename Graph, typename U, typename V, typename Seen>
         struct is_reachable_not_same;
 
-        template <typename U, typename V, typename Seen>
+        template <typename Graph, typename U, typename V, typename Seen>
         struct is_reachable_impl
             : or_<
                 is_same<U, V>,
-                is_adjacent<U, V>,
-                is_reachable_not_same<U, V, Seen>
+                is_adjacent<Graph, U, V>,
+                is_reachable_not_same<Graph, U, V, Seen>
             >
         { };
 
-        template <typename U, typename V, typename Seen>
+        template <typename Graph, typename U, typename V, typename Seen>
         struct is_reachable_not_same {
             using NewSeen = typename insert<Seen, U>::type;
 
             using UnseenAdjacentVertices = filter_view<
-                typename adjacent_vertices_of<U>::type,
+                typename adjacent_vertices_of<Graph, U>::type,
                 not_<has_key<NewSeen, _1>>
             >;
 
             using type = typename any_of<
                 UnseenAdjacentVertices,
-                is_reachable_impl<_1, V, NewSeen>
+                is_reachable_impl<Graph, _1, V, NewSeen>
             >::type;
         };
     }
 
     //! Return whether `V` is reachable from `U`. A vertex is considered
     //! reachable from itself.
-    template <typename U, typename V>
+    template <typename Graph, typename U, typename V>
     struct is_reachable
-        : is_reachable_detail::is_reachable_impl<U, V, set<>>
+        : is_reachable_detail::is_reachable_impl<Graph, U, V, set<>>
     { };
 }} // end namespace boost::mpl
 
