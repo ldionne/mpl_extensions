@@ -109,6 +109,7 @@ struct assert_matches_impl<Ret (T, Pattern)>
 { };
 } // end namespace matches_detail
 
+using matches_detail::dont_match;
 using matches_detail::match_all_of;
 using matches_detail::match_any;
 using matches_detail::match_any_of;
