@@ -62,7 +62,7 @@ template <typename Graph, typename Vertex>
 struct reachable_set
     : reachable_set_detail::impl<
         Graph
-    >::template apply<set<>, vector<Vertex>>
+    >::template apply<typename set<>::type, typename vector<Vertex>::type>
 { };
 }} // end namespace boost::mpl
 

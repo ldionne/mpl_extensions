@@ -53,7 +53,9 @@ namespace boost { namespace mpl {
     //! reachable from itself.
     template <typename Graph, typename U, typename V>
     struct is_reachable
-        : is_reachable_detail::is_reachable_impl<Graph, U, V, set<>>
+        : is_reachable_detail::is_reachable_impl<
+            Graph, U, V, typename set<>::type
+        >
     { };
 }} // end namespace boost::mpl
 

@@ -21,7 +21,7 @@ namespace boost { namespace mpl {
     template <typename Graph, typename Vertex>
     struct adjacent_vertices_of
         : fold<typename open_neighborhood_of<Graph, Vertex>::type,
-            set<>,
+            typename set<>::type,
             if_<
                 is_graph<_2>,
                 set_insert_range<

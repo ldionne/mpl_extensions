@@ -20,7 +20,7 @@ namespace boost { namespace mpl {
     struct topological_sort
         : sort<typename vertices_of<Graph>::type,
             is_reachable<Graph, _1, _2>,
-            front_inserter<vector<>>
+            front_inserter<typename vector<>::type>
         >
     { };
 }} // end namespace boost::mpl

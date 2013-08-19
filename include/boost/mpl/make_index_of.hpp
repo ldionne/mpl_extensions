@@ -24,7 +24,7 @@ namespace boost { namespace mpl {
     struct make_index_of
         : fold<
             Sequence,
-            map<>,
+            typename map<>::type,
             insert<_1,
                 pair<
                     apply_wrap1<typename lambda<MakeKey>::type, _2>,

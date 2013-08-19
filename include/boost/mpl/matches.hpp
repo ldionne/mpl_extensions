@@ -37,10 +37,10 @@ struct matches<Node<Children1...>, Node<Children2...>>
         bool_<sizeof...(Children1) == sizeof...(Children2)>,
         all_of<
             zip_view<
-                vector<
-                    vector<Children1...>,
-                    vector<Children2...>
-                >
+                typename vector<
+                    typename vector<Children1...>::type,
+                    typename vector<Children2...>::type
+                >::type
             >,
             unpack_args<matches<_1, _2>>
         >
@@ -57,7 +57,7 @@ template <typename ...Patterns> struct match_any_of;
 template <typename T, typename ...Patterns>
 struct matches<T, match_any_of<Patterns...>>
     : any_of<
-        vector<Patterns...>,
+        typename vector<Patterns...>::type,
         matches<T, _1>
     >
 { };
@@ -67,7 +67,7 @@ template <typename ...Patterns> struct match_all_of;
 template <typename T, typename ...Patterns>
 struct matches<T, match_all_of<Patterns...>>
     : all_of<
-        vector<Patterns...>,
+        typename vector<Patterns...>::type,
         matches<T, _1>
     >
 { };
@@ -84,7 +84,7 @@ struct matches_any_of {
     template <typename T>
     struct apply
         : any_of<
-            vector<Patterns...>,
+            typename vector<Patterns...>::type,
             matches<T, _1>
         >
     { };
@@ -96,7 +96,7 @@ template <template <typename ...> class Node,
           typename ...Patterns>
 struct matches<Node<Children...>, Node<match_all_of<Patterns...>>>
     : all_of<
-        vector<Children...>,
+        typename vector<Children...>::type,
         matches_detail::matches_any_of<Patterns...>
     >
 { };
