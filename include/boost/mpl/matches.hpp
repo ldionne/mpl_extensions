@@ -7,6 +7,7 @@
 #define BOOST_MPL_MATCHES_HPP
 
 #include <boost/mpl/any_of.hpp>
+#include <boost/mpl/apply.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/equal.hpp>
 #include <boost/mpl/not.hpp>
@@ -27,6 +28,10 @@ namespace match {
     //! Matches iff the pattern does not match.
     template <typename Pattern>
     struct not_;
+
+    //! Matches iff the `LambdaExpression` returns true.
+    template <typename LambdaExpression>
+    struct if_;
 } // end namespace match
 
 /*!
@@ -73,6 +78,11 @@ struct matches<T, match::any_of<Patterns...>>
 template <typename T, typename Pattern>
 struct matches<T, match::not_<Pattern>>
     : not_<matches<T, Pattern>>
+{ };
+
+template <typename T, typename LambdaExpression>
+struct matches<T, match::if_<LambdaExpression>>
+    : bool_<apply<LambdaExpression, T>::type::value>
 { };
 
 namespace matches_detail {

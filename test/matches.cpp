@@ -4,9 +4,12 @@
  */
 
 #include <boost/mpl/matches.hpp>
+#include <boost/mpl/placeholders.hpp>
+#include <boost/type_traits/is_same.hpp>
 
 
-using namespace boost::mpl;
+using namespace boost;
+using namespace mpl;
 
 struct Leaf;
 template <typename ...> struct Node;
@@ -31,7 +34,7 @@ BOOST_MPL_ASSERT_MATCHES_NOT((
     Node<Node<Leaf>, Node<>>
 ));
 
-// Pattern matching with the `match::any` keyword.
+// `match::any`
 BOOST_MPL_ASSERT_MATCHES((Leaf, match::any));
 BOOST_MPL_ASSERT_MATCHES((Node<>, match::any));
 BOOST_MPL_ASSERT_MATCHES((Node<Leaf>, match::any));
@@ -43,6 +46,10 @@ BOOST_MPL_ASSERT_MATCHES((
     Node<Node<Leaf>, Node<>, Node<Leaf>>,
     Node<Node<match::any>, Node<>, Node<Leaf>>
 ));
+
+// `match::if_`
+BOOST_MPL_ASSERT_MATCHES((Leaf, match::if_<is_same<Leaf, _1>>));
+BOOST_MPL_ASSERT_MATCHES_NOT((struct X, match::if_<is_same<Leaf, _1>>));
 
 
 int main() { }
