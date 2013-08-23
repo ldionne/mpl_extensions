@@ -51,5 +51,9 @@ BOOST_MPL_ASSERT_MATCHES((
 BOOST_MPL_ASSERT_MATCHES((Leaf, match::if_<is_same<Leaf, _1>>));
 BOOST_MPL_ASSERT_MATCHES_NOT((struct X, match::if_<is_same<Leaf, _1>>));
 
+// `match::unless`
+BOOST_MPL_ASSERT_MATCHES_NOT((Leaf, match::unless<is_same<Leaf, _1>>));
+BOOST_MPL_ASSERT_MATCHES((struct X, match::unless<is_same<Leaf, _1>>));
+
 
 int main() { }

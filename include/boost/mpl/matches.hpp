@@ -32,6 +32,10 @@ namespace match {
     //! Matches iff the `LambdaExpression` returns true.
     template <typename LambdaExpression>
     struct if_;
+
+    //! Matches iff the `LambdaExpression` returns false.
+    template <typename LambdaExpression>
+    struct unless;
 } // end namespace match
 
 /*!
@@ -83,6 +87,11 @@ struct matches<T, match::not_<Pattern>>
 template <typename T, typename LambdaExpression>
 struct matches<T, match::if_<LambdaExpression>>
     : bool_<apply<LambdaExpression, T>::type::value>
+{ };
+
+template <typename T, typename LambdaExpression>
+struct matches<T, match::unless<LambdaExpression>>
+    : not_<apply<LambdaExpression, T>>
 { };
 
 namespace matches_detail {
