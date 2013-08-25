@@ -37,9 +37,9 @@ namespace boost { namespace mpl {
     namespace sequence_facade_detail {
         struct unspecialized_tag;
 
-        template <template <typename> class intrinsic_impl, typename ...Args>
+        template <template <typename ...> class Intrinsic, typename ...Args>
         struct use_default
-            : intrinsic_impl<unspecialized_tag>::template apply<Args...>
+            : Intrinsic<unspecialized_tag>::template apply<Args...>
         { };
     } // end namespace sequence_facade_detail
 
