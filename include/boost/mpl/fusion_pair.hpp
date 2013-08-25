@@ -4,8 +4,8 @@
  * the Boost.MPL.
  */
 
-#ifndef DYNO_DETAIL_MPL_FUSION_PAIR_HPP
-#define DYNO_DETAIL_MPL_FUSION_PAIR_HPP
+#ifndef BOOST_MPL_FUSION_PAIR_HPP
+#define BOOST_MPL_FUSION_PAIR_HPP
 
 #include <boost/fusion/include/pair.hpp>
 #include <boost/mpl/pair.hpp>
@@ -33,4 +33,4 @@ namespace boost { namespace mpl {
     { };
 }}
 
-#endif // !DYNO_DETAIL_MPL_FUSION_PAIR_HPP
+#endif // !BOOST_MPL_FUSION_PAIR_HPP

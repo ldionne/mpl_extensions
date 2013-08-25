@@ -3,8 +3,8 @@
  * This file defines `boost::mpl::any_of`.
  */
 
-#ifndef DYNO_DETAIL_MPL_ANY_OF_HPP
-#define DYNO_DETAIL_MPL_ANY_OF_HPP
+#ifndef BOOST_MPL_ANY_OF_HPP
+#define BOOST_MPL_ANY_OF_HPP
 
 #include <boost/mpl/none_of.hpp>
 #include <boost/mpl/not.hpp>
@@ -19,4 +19,4 @@ struct any_of
 { };
 }} // end namespace boost::mpl
 
-#endif // !DYNO_DETAIL_MPL_ANY_OF_HPP
+#endif // !BOOST_MPL_ANY_OF_HPP

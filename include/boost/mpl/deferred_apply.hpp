@@ -4,8 +4,8 @@
  * `boost::mpl::deferred_apply_wrap`.
  */
 
-#ifndef DYNO_DETAIL_MPL_DEFERRED_APPLY_HPP
-#define DYNO_DETAIL_MPL_DEFERRED_APPLY_HPP
+#ifndef BOOST_MPL_DEFERRED_APPLY_HPP
+#define BOOST_MPL_DEFERRED_APPLY_HPP
 
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/lambda.hpp>
@@ -56,4 +56,4 @@ struct deferred_apply
 { };
 }} // end namespace boost::mpl
 
-#endif // !DYNO_DETAIL_MPL_DEFERRED_APPLY_HPP
+#endif // !BOOST_MPL_DEFERRED_APPLY_HPP
