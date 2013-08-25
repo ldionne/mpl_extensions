@@ -19,6 +19,7 @@ endfunction()
 
 
 mpl_extensions_add_test(adjacent_vertices_of adjacent_vertices_of.cpp)
+mpl_extensions_add_test(assoc_equal          assoc_equal.cpp)
 mpl_extensions_add_test(deferred_apply       deferred_apply.cpp)
 mpl_extensions_add_test(is_adjacent          is_adjacent.cpp)
 mpl_extensions_add_test(is_reachable         is_reachable.cpp)
