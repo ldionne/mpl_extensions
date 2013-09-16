@@ -55,7 +55,7 @@ namespace boost { namespace mpl {
                                                                             \
         template <typename Sequence, typename ...Args>                      \
         static sequence_facade_detail::use_default<                         \
-            BOOST_PP_CAT(intrinsic, _impl), Sequence, Args...               \
+            mpl::BOOST_PP_CAT(intrinsic, _impl), Sequence, Args...          \
         > pick(...);                                                        \
                                                                             \
     public:                                                                 \
